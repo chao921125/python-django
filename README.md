@@ -1,60 +1,95 @@
-# Cerebras-GPT 13B 模型下载地址
-[pytorch_model-00001-of-00002.bin](https://huggingface.co/cerebras/Cerebras-GPT-13B/resolve/main/pytorch_model-00001-of-00002.bin)
-[pytorch_model-00002-of-00002.bin](https://huggingface.co/cerebras/Cerebras-GPT-13B/resolve/main/pytorch_model-00002-of-00002.bin)
-# gpt4all-j 模型下载地址
-[pytorch_model-00001-of-00002.bin](https://huggingface.co/nomic-ai/gpt4all-j/resolve/main/pytorch_model-00001-of-00002.bin)
-[pytorch_model-00002-of-00002.bin](https://huggingface.co/nomic-ai/gpt4all-j/resolve/main/pytorch_model-00002-of-00002.bin)
-# LLM模型排行榜
-随着大量的大型语言模型（LLM）和聊天机器人每周都在发布，通常都对其性能进行了浮夸的宣称，很难筛选出开源社区正在取得的真正进展，以及哪种模型是当前的技术水平🤗 开放式LLM排行榜旨在跟踪、排名和评估LLM和聊天机器人的发布情况。我们在Eleuther AI语言模型评估线束的4个关键基准上评估模型，Eleuther人工智能语言模型评估套件是一个统一的框架，用于在大量不同的评估任务上测试生成语言模型。该排行榜的一个关键优势是，社区中的任何人都可以在🤗 GPU集群，只要它是🤗 轮毂上有重物的变压器模型。我们还支持为非商业许可模型（如LLaMa）评估具有增量权重的模型。
+---
+license: apache-2.0
+datasets:
+- nomic-ai/gpt4all-j-prompt-generations
+language:
+- en
+pipeline_tag: text-generation
+---
 
-| Model                                                                                                                   | Revision |
-|-------------------------------------------------------------------------------------------------------------------------|----------|
-| [llama-65b](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/)                                           | main     |
-| [MetaIX/GPT4-X-Alpasta-30b](https://huggingface.co/MetaIX/GPT4-X-Alpasta-30b)                                           | main     |
-| [digitous/Alpacino30b](https://huggingface.co/digitous/Alpacino30b)                                                     | main     |  
-| [Aeala/GPT4-x-AlpacaDente2-30b](https://huggingface.co/Aeala/GPT4-x-AlpacaDente2-30b)                                   | main     |  
-| [TheBloke/dromedary-65b-lora-HF](https://huggingface.co/TheBloke/dromedary-65b-lora-HF)                                 | main     |  
-| [llama-30b](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/)                                           | main     |  
-| [TheBloke/vicuna-13B-1.1-HF](https://huggingface.co/TheBloke/vicuna-13B-1.1-HF)                                         | main     |  
-| [chavinlo/gpt4-x-alpaca](https://huggingface.co/chavinlo/gpt4-x-alpaca)                                                 | main     |  
-| [eachadea/vicuna-13b](https://huggingface.co/eachadea/vicuna-13b)                                                       | main     |  
-| [stable-vicuna-13b](https://huggingface.co/CarperAI/stable-vicuna-13b-delta)                                            | main     |  
-| [eachadea/vicuna-7b-1.1](https://huggingface.co/eachadea/vicuna-7b-1.1)                                                 | main     |  
-| [llama-13b](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/)                                           | main     |  
-| [alpaca-13b](https://crfm.stanford.edu/2023/03/13/alpaca.html)                                                          | main     |  
-| [wordcab/llama-natural-instructions-13b](https://huggingface.co/wordcab/llama-natural-instructions-13b)                 | main     |  
-| [chainyo/alpaca-lora-7b](https://huggingface.co/chainyo/alpaca-lora-7b)                                                 | main     |  
-| [llama-7b](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/)                                            | main     |  
-| [nomic-ai/gpt4all-j](https://huggingface.co/nomic-ai/gpt4all-j)                                                         | main     |  
-| [EleutherAI/gpt-neox-20b](https://huggingface.co/EleutherAI/gpt-neox-20b)                                               | main     |  
-| [togethercomputer/RedPajama-INCITE-Base-7B-v0.1](https://huggingface.co/togethercomputer/RedPajama-INCITE-Base-7B-v0.1) | main     |  
-| [OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5](https://huggingface.co/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5) | main     |  
-| [databricks/dolly-v2-12b](https://huggingface.co/databricks/dolly-v2-12b)                                               | main     |  
-| [Pirr/pythia-13b-deduped-green\_devil](https://huggingface.co/Pirr/pythia-13b-deduped-green_devil)                      | main     |  
-| [databricks/dolly-v2-7b](https://huggingface.co/databricks/dolly-v2-7b)                                                 | main     |  
-| [EleutherAI/gpt-j-6b](https://huggingface.co/EleutherAI/gpt-j-6b)                                                       | main     |  
-| [facebook/opt-13b](https://huggingface.co/facebook/opt-13b)                                                             | main     |  
-| [KoboldAI/OPT-13B-Nerybus-Mix](https://huggingface.co/KoboldAI/OPT-13B-Nerybus-Mix)                                     | main     |  
-| [togethercomputer/RedPajama-INCITE-Base-3B-v1](https://huggingface.co/togethercomputer/RedPajama-INCITE-Base-3B-v1)     | main     |  
-| [databricks/dolly-v2-3b](https://huggingface.co/databricks/dolly-v2-3b)                                                 | main     |  
-| [HuggingFaceH4/starchat-alpha](https://huggingface.co/HuggingFaceH4/starchat-alpha)                                     | main     |  
-| [Salesforce/codegen-16B-multi](https://huggingface.co/Salesforce/codegen-16B-multi)                                     | main     |  
-| [stabilityai/stablelm-tuned-alpha-7b](https://huggingface.co/stabilityai/stablelm-tuned-alpha-7b)                       | main     |  
-| [facebook/opt-1.3b](https://huggingface.co/facebook/opt-1.3b)                                                           | main     |  
-| [gpt2-xl](https://huggingface.co/gpt2-xl)                                                                               | main     |  
-| [aisquared/dlite-v2-774m](https://huggingface.co/aisquared/dlite-v2-774m)                                               | main     |  
-| [gpt2-large](https://huggingface.co/gpt2-large)                                                                         | main     |  
-| [gpt2-medium](https://huggingface.co/gpt2-medium)                                                                       | main     |  
-| [cerebras/Cerebras-GPT-1.3B](https://huggingface.co/cerebras/Cerebras-GPT-1.3B)                                         | main     |  
-| [facebook/opt-350m](https://huggingface.co/facebook/opt-350m)                                                           | main     |  
-| [facebook/opt-125m](https://huggingface.co/facebook/opt-125m)                                                           | main     |  
-| [gpt2](https://huggingface.co/gpt2)                                                                                     | main     |  
-| [distilgpt2](https://huggingface.co/distilgpt2)                                                                         | main     |  
-| [cerebras/Cerebras-GPT-111M](https://huggingface.co/cerebras/Cerebras-GPT-111M)                                         | main     |  
-| [vicgalle/gpt2-alpaca-gpt4](https://huggingface.co/vicgalle/gpt2-alpaca-gpt4)                                           | main     |  
-| [bigscience/bloomz-3b](https://huggingface.co/bigscience/bloomz-3b)                                                     | main     |  
-| [lamini/instruct-tuned-3b](https://huggingface.co/lamini/instruct-tuned-3b)                                             | main     |  
-| [hakurei/instruct-12b](https://huggingface.co/hakurei/instruct-12b)                                                     | main     |  
-| [stabilityai/stablelm-tuned-alpha-3b](https://huggingface.co/stabilityai/stablelm-tuned-alpha-3b)                       | main     |  
-| [pythainlp/wangchanglm-7.5B-sft-en-sharded](https://huggingface.co/pythainlp/wangchanglm-7.5B-sft-en-sharded)           | main     |
-| [stabilityai/stablelm-base-alpha-3b](https://huggingface.co/stabilityai/stablelm-base-alpha-3b)                         | main     |
+# Model Card for GPT4All-J-v1.0
+
+An Apache-2 licensed chatbot trained over a massive curated corpus of assistant interactions including word problems, multi-turn dialogue, code, poems, songs, and stories.
+
+## Model Details
+
+### Model Description
+
+<!-- Provide a longer summary of what this model is. -->
+
+This model has been finetuned from [GPT-J](https://huggingface.co/EleutherAI/gpt-j-6B)
+
+- **Developed by:** [Nomic AI](https://home.nomic.ai)
+- **Model Type:** A finetuned GPT-J model on assistant style interaction data
+- **Language(s) (NLP):** English
+- **License:** Apache-2
+- **Finetuned from model [optional]:** [GPT-J](https://huggingface.co/EleutherAI/gpt-j-6B)
+
+
+We have released several versions of our finetuned GPT-J model using [different dataset versions](https://huggingface.co/datasets/nomic-ai/gpt4all-j-prompt-generations)
+
+- v1.0: The original model trained on the v1.0 dataset
+- v1.1-breezy: Trained on afiltered dataset where we removed all instances of AI language model
+- v1.2-jazzy: Trained on a filtered dataset where we also removed instances like I'm sorry, I can't answer... and AI language model
+- v1.3-groovy: We added Dolly and ShareGPT to the v1.2 dataset and removed ~8% of the dataset in v1.2 that contained semantic duplicates using [Atlas](https://atlas.nomic.ai/).
+
+To download a model with a specific revision run 
+
+```python
+from transformers import AutoModelForCausalLM
+
+model = AutoModelForCausalLM.from_pretrained("nomic-ai/gpt4all-j", revision="v1.2-jazzy")
+```
+
+Downloading without specifying `revision` defaults to `main`/`v1.0`.
+
+### Model Sources [optional]
+
+<!-- Provide the basic links for the model. -->
+
+- **Repository:** [https://github.com/nomic-ai/gpt4all](https://github.com/nomic-ai/gpt4all)
+- **Base Model Repository:** [https://github.com/kingoflolz/mesh-transformer-jax](https://github.com/kingoflolz/mesh-transformer-jax)
+- **Paper [optional]:** [GPT4All-J: An Apache-2 Licensed Assistant-Style Chatbot](https://s3.amazonaws.com/static.nomic.ai/gpt4all/2023_GPT4All-J_Technical_Report_2.pdf)
+- **Demo [optional]:** [https://gpt4all.io/](https://gpt4all.io/)
+
+
+### Training Procedure 
+GPT4All is made possible by our compute partner [Paperspace](https://www.paperspace.com/).
+
+Trained on a DGX cluster with 8 A100 80GB GPUs for ~12 hours. Using Deepspeed + Accelerate, we use a global batch size of 256 with a learning rate of 2e-5. More information can be found in the repo.
+
+
+### Results
+
+Results on common sense reasoning benchmarks
+
+```
+| Model                     |  BoolQ   |   PIQA   | HellaSwag | WinoGrande |  ARC-e   |  ARC-c   |   OBQA   |   Avg.   |
+|:--------------------------|:--------:|:--------:|:---------:|:----------:|:--------:|:--------:|:--------:|:--------:|
+| GPT4All-J 6B v1.0         |   73.4   |   74.8   |   63.4    |    64.7    |   54.9   |   36.0   |   40.2   |   58.2   |
+| GPT4All-J v1.1-breezy     |   74.0   |   75.1   |   63.2    |    63.6    |   55.4   |   34.9   |   38.4   |   57.8   |
+| GPT4All-J v1.2-jazzy      |   74.8   |   74.9   |   63.6    |    63.8    |   56.6   |   35.3   |   41.0   |   58.6   |
+| GPT4All-J v1.3-groovy     |   73.6   |   74.3   |   63.8    |    63.5    |   57.7   |   35.0   |   38.8   |   58.1   |
+| GPT4All-J Lora 6B         |   68.6   |   75.8   |   66.2    |    63.5    |   56.4   |   35.7   |   40.2   |   58.1   |
+| GPT4All LLaMa Lora 7B     |   73.1   |   77.6   |   72.1    |    67.8    |   51.1   |   40.4   |   40.2   |   60.3   |
+| GPT4All 13B snoozy        | **83.3** |   79.2   |   75.0    |  **71.3**  |   60.9   |   44.2   |   43.4   | **65.3** |
+| Dolly 6B                  |   68.8   |   77.3   |   67.6    |    63.9    |   62.9   |   38.7   |   41.2   |   60.1   |
+| Dolly 12B                 |   56.7   |   75.4   |   71.0    |    62.2    |   64.6   |   38.5   |   40.4   |   58.4   |
+| Alpaca 7B                 |   73.9   |   77.2   |   73.9    |    66.1    |   59.8   |   43.3   |   43.4   |   62.4   |
+| Alpaca Lora 7B            |   74.3   | **79.3** |   74.0    |    68.8    |   56.6   |   43.9   |   42.6   |   62.8   |
+| GPT-J 6.7B                |   65.4   |   76.2   |   66.2    |    64.1    |   62.2   |   36.6   |   38.2   |   58.4   |
+| LLama 7B                  |   73.1   |   77.4   |   73.0    |    66.9    |   52.5   |   41.4   |   42.4   |   61.0   |
+| LLama 13B                 |   68.5   |   79.1   |   76.2    |    70.1    |   60.0   | **44.6** |   42.2   |   63.0   |
+| Pythia 6.7B               |   63.5   |   76.3   |   64.0    |    61.1    |   61.3   |   35.2   |   37.2   |   57.0   |
+| Pythia 12B                |   67.7   |   76.6   |   67.3    |    63.8    |   63.9   |   34.8   |    38    |   58.9   |
+| Fastchat T5               |   81.5   |   64.6   |   46.3    |    61.8    |   49.3   |   33.3   |   39.4   |   53.7   |
+| Fastchat Vicuña 7B        |   76.6   |   77.2   |   70.7    |    67.3    |   53.5   |   41.2   |   40.8   |   61.0   |
+| Fastchat Vicuña 13B       |   81.5   |   76.8   |   73.3    |    66.7    |   57.4   |   42.7   |   43.6   |   63.1   |
+| StableVicuña RLHF         |   82.3   |   78.6   |   74.1    |    70.9    |   61.0   |   43.5   | **44.4** |   65.0   |
+| StableLM Tuned            |   62.5   |   71.2   |   53.6    |    54.8    |   52.4   |   31.1   |   33.4   |   51.3   |
+| StableLM Base             |   60.1   |   67.4   |   41.2    |    50.1    |   44.9   |   27.0   |   32.0   |   42.2   |
+| Koala 13B                 |   76.5   |   77.9   |   72.6    |    68.8    |   54.3   |   41.0   |   42.8   |   62.0   |
+| Open Assistant Pythia 12B |   67.9   |   78.0   |   68.1    |    65.0    |   64.2   |   40.4   |   43.2   |   61.0   |
+| Mosaic mpt-7b             |   74.8   | **79.3** | **76.3**  |    68.6    | **70.0** |   42.2   |   42.6   |   64.8   |
+| text-davinci-003          |   88.1   |   83.8   |   83.4    |    75.8    |   83.9   |   63.9   |   51.0   |   75.7   |
+```
