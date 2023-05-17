@@ -1,32 +1,42 @@
 {
-  "_name_or_path": "/cb/scrap/cynthia/Cerebras-GPT-13B",
-  "activation_function": "gelu",
+  "_name_or_path": "EleutherAI/gpt-j-6B",
+  "activation_function": "gelu_new",
   "architectures": [
-    "GPT2Model"
+    "GPTJForCausalLM"
   ],
   "attn_pdrop": 0.0,
   "bos_token_id": 50256,
   "embd_pdrop": 0.0,
   "eos_token_id": 50256,
+  "gradient_checkpointing": false,
   "initializer_range": 0.02,
   "layer_norm_epsilon": 1e-05,
-  "model_type": "gpt2",
-  "n_embd": 5120,
-  "n_head": 40,
-  "n_inner": 20480,
-  "n_layer": 40,
+  "model_type": "gptj",
+  "n_embd": 4096,
+  "n_head": 16,
+  "n_inner": null,
+  "n_layer": 28,
   "n_positions": 2048,
-  "reorder_and_upcast_attn": false,
   "resid_pdrop": 0.0,
-  "scale_attn_by_inverse_layer_idx": false,
+  "rotary": true,
+  "rotary_dim": 64,
   "scale_attn_weights": true,
   "summary_activation": null,
   "summary_first_dropout": 0.1,
   "summary_proj_to_labels": true,
   "summary_type": "cls_index",
   "summary_use_proj": true,
-  "torch_dtype": "float32",
-  "transformers_version": "4.27.2",
-  "use_cache": true,
-  "vocab_size": 50257
+  "task_specific_params": {
+    "text-generation": {
+      "do_sample": true,
+      "max_length": 50,
+      "temperature": 1.0
+    }
+  },
+  "tie_word_embeddings": false,
+  "tokenizer_class": "GPT2Tokenizer",
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.28.0.dev0",
+  "use_cache": false,
+  "vocab_size": 50400
 }

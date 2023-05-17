@@ -1,184 +1,95 @@
-模型文件太大，稍后放到网盘中去
 ---
-language:
-- en
-inference: false
-tags:
-- pytorch
-- causal-lm
 license: apache-2.0
 datasets:
-- the_pile
+- nomic-ai/gpt4all-j-prompt-generations
+language:
+- en
 pipeline_tag: text-generation
 ---
 
-# Cerebras-GPT 13B
-Check out our [Blog Post](https://www.cerebras.net/cerebras-gpt) and [arXiv paper](https://arxiv.org/abs/2304.03208)!
+# Model Card for GPT4All-J-v1.0
 
-## Model Description
-
-The Cerebras-GPT family is released to facilitate research into LLM scaling laws using open architectures and data sets and demonstrate the simplicity of and scalability of training LLMs on the Cerebras software and hardware stack. All Cerebras-GPT models are available on Hugging Face.
-
-The family includes 111M, 256M, 590M, 1.3B, 2.7B, 6.7B, and 13B models.
-
-All models in the Cerebras-GPT family have been trained in accordance with [Chinchilla scaling laws](https://arxiv.org/abs/2203.15556) (20 tokens per model parameter) which is compute-optimal.
-
-These models were trained on the [Andromeda](https://www.cerebras.net/andromeda/) AI supercomputer comprised of 16 CS-2 wafer scale systems. Cerebras' [weight streaming technology](https://www.cerebras.net/blog/linear-scaling-made-possible-with-weight-streaming) simplifies the training of LLMs by disaggregating compute from model storage. This allowed for efficient scaling of training across nodes using simple data parallelism.
-
-Cerebras systems for pre-training and fine tuning are available in the cloud via the [Cerebras Model Studio](https://www.cerebras.net/product-cloud/). Cerebras CS-2 compatible checkpoints are available in [Cerebras Model Zoo](https://github.com/Cerebras/modelzoo).
+An Apache-2 licensed chatbot trained over a massive curated corpus of assistant interactions including word problems, multi-turn dialogue, code, poems, songs, and stories.
 
 ## Model Details
-* Developed by: [Cerebras Systems](https://www.cerebras.net/)
-* License: Apache 2.0
-* Model type: Transformer-based Language Model
-* Architecture: GPT-3 style architecture
-* Data set: The Pile
-* Tokenizer: Byte Pair Encoding
-* Vocabulary Size: 50257
-* Sequence Length: 2048
-* Optimizer: AdamW, (β1, β2) = (0.9, 0.95), adam_eps = 1e−8 (1e−9 for larger models)
-* Positional Encoding: Learned
-* Language: English
-* Learn more: Dense Scaling Laws Paper for training procedure, config files, and details on how to use.
 
-**Contact**: To ask questions about Cerebras-GPT models, join the [Cerebras Discord](https://discord.gg/q6bZcMWJVu).
+### Model Description
 
-This is the standard parameterization version of Cerebras-GPT with **13B** parameters
+<!-- Provide a longer summary of what this model is. -->
 
-Related models: [Cerebras-GPT Models](https://huggingface.co/models?sort=downloads&search=cerebras-gpt)
+This model has been finetuned from [GPT-J](https://huggingface.co/EleutherAI/gpt-j-6B)
 
-<br><br>
+- **Developed by:** [Nomic AI](https://home.nomic.ai)
+- **Model Type:** A finetuned GPT-J model on assistant style interaction data
+- **Language(s) (NLP):** English
+- **License:** Apache-2
+- **Finetuned from model [optional]:** [GPT-J](https://huggingface.co/EleutherAI/gpt-j-6B)
 
-| Model         | Parameters | Layers | d_model | Heads | d_head | d_ffn  | LR       | BS (seq) | BS (tokens)     |
-|---------------|------------|--------|---------|-------|--------|--------|----------|----------|----------------|
-| Cerebras-GPT  | 111M       | 10     | 768     | 12    | 64     | 3072   | 6.0E-04 | 120      | 246K           |
-| Cerebras-GPT  | 256M       | 14     | 1088    | 17    | 64     | 4352   | 6.0E-04 | 264      | 541K           |
-| Cerebras-GPT  | 590M       | 18     | 1536    | 12    | 128    | 6144   | 2.0E-04 | 264      | 541K           |
-| Cerebras-GPT  | 1.3B       | 24     | 2048    | 16    | 128    | 8192   | 2.0E-04 | 528      | 1.08M          |
-| Cerebras-GPT  | 2.7B       | 32     | 2560    | 20    | 128    | 10240  | 2.0E-04 | 528      | 1.08M          |
-| Cerebras-GPT  | 6.7B       | 32     | 4096    | 32    | 128    | 16384  | 1.2E-04 | 1040     | 2.13M          |
-| Cerebras-GPT  | 13B        | 40     | 5120    | 40    | 128    | 20480  | 1.2E-04 | 720 &rarr; 1080 | 1.47M &rarr; 2.21M    |
 
-<br><br>
+We have released several versions of our finetuned GPT-J model using [different dataset versions](https://huggingface.co/datasets/nomic-ai/gpt4all-j-prompt-generations)
 
-## Quickstart 
+- v1.0: The original model trained on the v1.0 dataset
+- v1.1-breezy: Trained on afiltered dataset where we removed all instances of AI language model
+- v1.2-jazzy: Trained on a filtered dataset where we also removed instances like I'm sorry, I can't answer... and AI language model
+- v1.3-groovy: We added Dolly and ShareGPT to the v1.2 dataset and removed ~8% of the dataset in v1.2 that contained semantic duplicates using [Atlas](https://atlas.nomic.ai/).
 
-This model can be easily loaded using the AutoModelForCausalLM functionality:
-```python
-from transformers import AutoTokenizer, AutoModelForCausalLM
-
-tokenizer = AutoTokenizer.from_pretrained("cerebras/Cerebras-GPT-13B")
-model = AutoModelForCausalLM.from_pretrained("cerebras/Cerebras-GPT-13B")
-
-text = "Generative AI is "
-```
-
-And can be used with Hugging Face Pipelines
+To download a model with a specific revision run 
 
 ```python
-from transformers import pipeline
+from transformers import AutoModelForCausalLM
 
-pipe = pipeline("text-generation", model=model, tokenizer=tokenizer)
-generated_text = pipe(text, max_length=50, do_sample=False, no_repeat_ngram_size=2)[0]
-print(generated_text['generated_text'])
+model = AutoModelForCausalLM.from_pretrained("nomic-ai/gpt4all-j", revision="v1.2-jazzy")
 ```
 
-or with `model.generate()`
+Downloading without specifying `revision` defaults to `main`/`v1.0`.
 
-```python
-inputs = tokenizer(text, return_tensors="pt")
-outputs = model.generate(**inputs, num_beams=5, 
-                        max_new_tokens=50, early_stopping=True,
-                        no_repeat_ngram_size=2)
-text_output = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-print(text_output[0])
+### Model Sources [optional]
+
+<!-- Provide the basic links for the model. -->
+
+- **Repository:** [https://github.com/nomic-ai/gpt4all](https://github.com/nomic-ai/gpt4all)
+- **Base Model Repository:** [https://github.com/kingoflolz/mesh-transformer-jax](https://github.com/kingoflolz/mesh-transformer-jax)
+- **Paper [optional]:** [GPT4All-J: An Apache-2 Licensed Assistant-Style Chatbot](https://s3.amazonaws.com/static.nomic.ai/gpt4all/2023_GPT4All-J_Technical_Report_2.pdf)
+- **Demo [optional]:** [https://gpt4all.io/](https://gpt4all.io/)
+
+
+### Training Procedure 
+GPT4All is made possible by our compute partner [Paperspace](https://www.paperspace.com/).
+
+Trained on a DGX cluster with 8 A100 80GB GPUs for ~12 hours. Using Deepspeed + Accelerate, we use a global batch size of 256 with a learning rate of 2e-5. More information can be found in the repo.
+
+
+### Results
+
+Results on common sense reasoning benchmarks
+
 ```
-<br><br>
-
-## Training data
-
-Cerebras-GPT is trained using [the Pile](https://pile.eleuther.ai) dataset from [EleutherAI](https://www.eleuther.ai). See the [Pile paper](https://arxiv.org/abs/2101.00027) for a more detailed breakdown of data sources and methodology. The Pile was cleaned using the ftfy library to normalize the text, then filtered using scripts provided by Eleuther.
-
-We tokenized the data using byte-pair encoding using the GPT-2 vocabulary. Our tokenized version of the Pile has 371B tokens. We include more details about the training dataset preprocessing in Appendix A.1 of our paper.
-
-Recent works find significant duplicate data present in the Pile. Eleuther’s Pythia applies a deduplication process to reduce replicated data, decreasing the Pile dataset size. Pythia was trained on both the standard dataset and deduplicated dataset to characterize the impact. Our models are trained on the standard Pile without deduplication, which may present an opportunity for further improvement with the deduplicated data set.
-
-<br><br>
-
-## Training procedure
-
-We use the GPT-3 style model architecture. All of our layers use full attention as opposed to the GPT-3 style sparse banded attention. The model shapes were selected to either follow aspect ratio 80 or are the same shape as GPT-3 models. Learning rate warmed up for 375M tokens (1500 steps for 111M and 256M models) and 10x cosine decayed. No dropout was used and weight decay was set to 0.1. All models are trained with MSL of 2048.
-
-All models were trained to Chinchilla point: 20 tokens per model parameter. Number of steps was chosen based on optimal batch size (varied by model) and fixed sequence length (2048). See Training Table, below, for details. 
-
-<br>
-
-Model Params | Sequence Length | Batch Size | Number of Steps | Tokens | Tokens per Parameter | Flops
------------- | -------------- | ---------- | --------------- | ------ | -------------------- | -----
-111M         | 2048           | 120        | 9037            | 2.22E+09 | 20                  | 2.6E+18
-256M         | 2048           | 264        | 9468            | 5.12E+09 | 20                  | 1.3E+19
-590M         | 2048           | 264        | 21836           | 1.18E+10 | 20                  | 6.1E+19
-1.3B         | 2048           | 528        | 24334           | 2.63E+10 | 20                  | 2.8E+20
-2.7B         | 2048           | 528        | 49041           | 5.30E+10 | 20                  | 1.1E+21
-6.7B         | 2048           | 1040       | 62522           | 1.33E+11 | 20                  | 6.3E+21
-13B          | 2048           | 720        | 174335          | 2.57E+11 | 20                  | 2.3E+22
-
-<br><br>
-
-## Evaluations
-
-We trained models from smallest to largest and fit a power law as we went along. The power law was helpful for extrapolating the validation loss of the next largest model we trained and provided confidence about whether the training run was going well.
-
-We performed upstream (pre-training) evaluations of text prediction cross-entropy using the Pile validation and test splits. We performed downstream evaluations of text generation accuracy on standardized tasks using the [Eleuther lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). Results are compared against many publicly available large language models in Section 3 of the paper.
-
-
-#### 0-shot Evaluation
-| Model   | Params | Training FLOPs | PILE test xent | Hella-Swag | PIQA  | Wino-Grande | Lambada | ARC-e | ARC-c | OpenBookQA | Downstream Average |
-| ------- | ----- | -------------- | -------------- | ---------- | ----- | ----------- | ------- | ----- | ----- | ---------- | ------------------ |
-| Cerebras-GPT | 111M  | 2.6E+18        | 2.566          | 0.268      | 0.594 | 0.488       | 0.194   | 0.380 | 0.166 | 0.118      | 0.315              |
-| Cerebras-GPT | 256M  | 1.3E+19        | 2.299          | 0.274      | 0.613 | 0.511       | 0.293   | 0.410 | 0.170 | 0.158      | 0.347              |
-| Cerebras-GPT | 590M  | 6.1E+19        | 2.184          | 0.291      | 0.627 | 0.498       | 0.366   | 0.464 | 0.190 | 0.158      | 0.370              |
-| Cerebras-GPT | 1.3B  | 2.8E+20        | 1.996          | 0.325      | 0.664 | 0.521       | 0.462   | 0.508 | 0.224 | 0.166      | 0.410              |
-| Cerebras-GPT | 2.7B  | 1.1E+21        | 1.834          | 0.386      | 0.701 | 0.559       | 0.567   | 0.571 | 0.246 | 0.206      | 0.462              |
-| Cerebras-GPT | 6.7B  | 6.3E+21        | 1.704          | 0.447      | 0.739 | 0.602       | 0.636   | 0.643 | 0.282 | 0.238      | 0.512              |
-| Cerebras-GPT | 13B   | 2.3E+22        | 1.575          | 0.513      | 0.766 | 0.646       | 0.696   | 0.714 | 0.367 | 0.286      | 0.570              |
-
-#### 5-shot Evaluation
-| Model    | Params | Hella-Swag | PIQA  | Wino-Grande | Lambada | ARC-e | ARC-c | OpenBookQA |
-| -------- | ----- | ----------| ----- | ----------- | -------| ----- | ----- | ---------- |
-| Cerebras-GPT | 111M  | 0.267     | 0.588 | 0.475       | 0.158  | 0.356 | 0.166 | 0.136      |
-| Cerebras-GPT | 256M  | 0.278     | 0.606 | 0.522       | 0.225  | 0.422 | 0.183 | 0.164      |
-| Cerebras-GPT | 590M  | 0.291     | 0.634 | 0.479       | 0.281  | 0.475 | 0.206 | 0.152      |
-| Cerebras-GPT | 1.3B  | 0.326     | 0.668 | 0.536       | 0.395  | 0.529 | 0.241 | 0.174      |
-| Cerebras-GPT | 2.7B  | 0.382     | 0.697 | 0.543       | 0.487  | 0.590 | 0.267 | 0.224      |
-| Cerebras-GPT | 6.7B  | 0.444     | 0.736 | 0.590       | 0.591  | 0.667 | 0.314 | 0.270      |
-| Cerebras-GPT | 13B   | 0.514     | 0.768 | 0.674       | 0.655  | 0.743 | 0.398 | 0.318      |
-
-
-<br><br>
-
-## Uses and Limitations
-
-### Intended Use
-The primary intended use is to further research into large language models. These models can be used as a foundation model for NLP, applications, ethics, and alignment research. Our primary intended users are researchers who are working to improve LLMs and practitioners seeking reference implementations, training setups, hyperparameters, or pre-trained models. We release these models with a fully permissive Apache license for the community to use freely.
-
-You may fine-tune and adapt Cerebras-GPT models for deployment via either Cerebras [Model Studio](https://www.cerebras.net/product-cloud/) or third-party libraries. Further safety-related testing and mitigations should be applied beore using the Cerebras-GPT model family in production downstream applications. 
-
-Due to financial and compute budgets, Cerebras-GPT models were only trained and evaluated following the approaches described in the paper.
-
-### Out of Scope Use
-Cerebras-GPT models are trained on the Pile, with English language only, and are not suitable for machine translation tasks.
-
-Cerebras-GPT models have not been tuned for human-facing dialog applications like chatbots and will not respond to prompts in a similar way to models that have received instruction tuning or reinforcement learning from human feedback (RLHF) like Flan-T5 or ChatGPT. Cerebras-GPT models can be tuned using those methods.
-
-### Risk, Bias, Ethical Considerations
-* **Data**: The Pile dataset has been thoroughly analyzed from various ethical standpoints such as toxicity analysis, gender bias, pejorative content, racially sensitive content etc. Please refer to Pile dataset references.
-* **Human life**: The outputs from this model may or may not align with human values. The risk needs to be thoroughly investigated before deploying this model in a production environment where it can directly impact human life.
-* **Risks and harms**: There can be distributional bias in the Pile dataset that can manifest in various forms in the downstream model deployment. There are other risks associated with large language models such as amplifying stereotypes, memorizing training data, or revealing private or secure information.
-* **Mitigations**: Only mitigations in standard Pile dataset pre-processing were employed when pre-training Cerebras-GPT.
-
-<br><br>
-
-## Acknowledgements
-
-We are thankful to all Cerebras engineers, past and present, that made this work possible.
+| Model                     |  BoolQ   |   PIQA   | HellaSwag | WinoGrande |  ARC-e   |  ARC-c   |   OBQA   |   Avg.   |
+|:--------------------------|:--------:|:--------:|:---------:|:----------:|:--------:|:--------:|:--------:|:--------:|
+| GPT4All-J 6B v1.0         |   73.4   |   74.8   |   63.4    |    64.7    |   54.9   |   36.0   |   40.2   |   58.2   |
+| GPT4All-J v1.1-breezy     |   74.0   |   75.1   |   63.2    |    63.6    |   55.4   |   34.9   |   38.4   |   57.8   |
+| GPT4All-J v1.2-jazzy      |   74.8   |   74.9   |   63.6    |    63.8    |   56.6   |   35.3   |   41.0   |   58.6   |
+| GPT4All-J v1.3-groovy     |   73.6   |   74.3   |   63.8    |    63.5    |   57.7   |   35.0   |   38.8   |   58.1   |
+| GPT4All-J Lora 6B         |   68.6   |   75.8   |   66.2    |    63.5    |   56.4   |   35.7   |   40.2   |   58.1   |
+| GPT4All LLaMa Lora 7B     |   73.1   |   77.6   |   72.1    |    67.8    |   51.1   |   40.4   |   40.2   |   60.3   |
+| GPT4All 13B snoozy        | **83.3** |   79.2   |   75.0    |  **71.3**  |   60.9   |   44.2   |   43.4   | **65.3** |
+| Dolly 6B                  |   68.8   |   77.3   |   67.6    |    63.9    |   62.9   |   38.7   |   41.2   |   60.1   |
+| Dolly 12B                 |   56.7   |   75.4   |   71.0    |    62.2    |   64.6   |   38.5   |   40.4   |   58.4   |
+| Alpaca 7B                 |   73.9   |   77.2   |   73.9    |    66.1    |   59.8   |   43.3   |   43.4   |   62.4   |
+| Alpaca Lora 7B            |   74.3   | **79.3** |   74.0    |    68.8    |   56.6   |   43.9   |   42.6   |   62.8   |
+| GPT-J 6.7B                |   65.4   |   76.2   |   66.2    |    64.1    |   62.2   |   36.6   |   38.2   |   58.4   |
+| LLama 7B                  |   73.1   |   77.4   |   73.0    |    66.9    |   52.5   |   41.4   |   42.4   |   61.0   |
+| LLama 13B                 |   68.5   |   79.1   |   76.2    |    70.1    |   60.0   | **44.6** |   42.2   |   63.0   |
+| Pythia 6.7B               |   63.5   |   76.3   |   64.0    |    61.1    |   61.3   |   35.2   |   37.2   |   57.0   |
+| Pythia 12B                |   67.7   |   76.6   |   67.3    |    63.8    |   63.9   |   34.8   |    38    |   58.9   |
+| Fastchat T5               |   81.5   |   64.6   |   46.3    |    61.8    |   49.3   |   33.3   |   39.4   |   53.7   |
+| Fastchat Vicuña 7B        |   76.6   |   77.2   |   70.7    |    67.3    |   53.5   |   41.2   |   40.8   |   61.0   |
+| Fastchat Vicuña 13B       |   81.5   |   76.8   |   73.3    |    66.7    |   57.4   |   42.7   |   43.6   |   63.1   |
+| StableVicuña RLHF         |   82.3   |   78.6   |   74.1    |    70.9    |   61.0   |   43.5   | **44.4** |   65.0   |
+| StableLM Tuned            |   62.5   |   71.2   |   53.6    |    54.8    |   52.4   |   31.1   |   33.4   |   51.3   |
+| StableLM Base             |   60.1   |   67.4   |   41.2    |    50.1    |   44.9   |   27.0   |   32.0   |   42.2   |
+| Koala 13B                 |   76.5   |   77.9   |   72.6    |    68.8    |   54.3   |   41.0   |   42.8   |   62.0   |
+| Open Assistant Pythia 12B |   67.9   |   78.0   |   68.1    |    65.0    |   64.2   |   40.4   |   43.2   |   61.0   |
+| Mosaic mpt-7b             |   74.8   | **79.3** | **76.3**  |    68.6    | **70.0** |   42.2   |   42.6   |   64.8   |
+| text-davinci-003          |   88.1   |   83.8   |   83.4    |    75.8    |   83.9   |   63.9   |   51.0   |   75.7   |
+```
