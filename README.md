@@ -1,3 +1,4 @@
+# main分支为说明文档及模型下载地址，项目在对应的其他分支上
 # Cerebras-GPT 13B 模型下载地址
 [pytorch_model-00001-of-00002.bin](https://huggingface.co/cerebras/Cerebras-GPT-13B/resolve/main/pytorch_model-00001-of-00002.bin)
 [pytorch_model-00002-of-00002.bin](https://huggingface.co/cerebras/Cerebras-GPT-13B/resolve/main/pytorch_model-00002-of-00002.bin)
